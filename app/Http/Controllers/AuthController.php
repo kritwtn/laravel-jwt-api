@@ -78,7 +78,8 @@ class AuthController extends Controller
 
     public function refresh()
     {
-        return $this->respondWithToken(JWTAuth::refresh());
+      
+        return response()->json(['message' => 'Refresh success'], 200);
     }
 
     protected function respondWithToken($token)
