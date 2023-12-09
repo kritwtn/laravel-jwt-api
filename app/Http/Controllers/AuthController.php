@@ -16,12 +16,14 @@ class AuthController extends Controller
             'email.unique' => 'The email has already been taken.',
             'password.required' => 'The password field is required.',
             'password.min' => 'The password must be at least :min characters.',
+            'role.required' => 'The role field is required.',
         ];
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:4',
+            'role' => 'required|string',
         ], $customMessages);
     
         if ($validator->fails()) {
@@ -36,6 +38,8 @@ class AuthController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
+            'role' => $request->input('role'),
+            
         ]);
 
         return response()->json(['user' => $user]);
